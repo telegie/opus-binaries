@@ -8,16 +8,19 @@ pacman -Syy (update pacman package list)
 
 pacman -S mingw-w64-x86_64-libssp (required by opus to support building with fortified functions)
 
+pacman -Sy mingw-w64-x86_64-cmake
+
 mkdir build
 
 mkdir install
 
 cd build
 
-Run ../script/configure-mingw64.sh
+cmake ../opus -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=../e4d4b74/x86_64-w64-mingw32
 
 make
 
 make install
 
-Move files outside of /install and fix prefix of opus.pc to where the files are moved.
+
+Note: Using ./configure leaves dll files that does not work well with MSVC.

@@ -1,16 +1,16 @@
 # Opus codec reference implementation pkg-config file
 
-prefix=/c/Users/hanseul/repos/telegie/deps/ffmpeg-binaries/opus-binaries/e4d4b74/x86_64-w64-mingw32
-exec_prefix=${prefix}
-libdir=${exec_prefix}/lib
-includedir=${prefix}/include
+prefix=C:/Users/hanseul/repos/telegie/deps/ffmpeg-binaries/opus-binaries/e4d4b74/x86_64-w64-mingw32
+exec_prefix=C:/Users/hanseul/repos/telegie/deps/ffmpeg-binaries/opus-binaries/e4d4b74/x86_64-w64-mingw32
+libdir=C:/Users/hanseul/repos/telegie/deps/ffmpeg-binaries/opus-binaries/e4d4b74/x86_64-w64-mingw32/lib
+includedir=C:/Users/hanseul/repos/telegie/deps/ffmpeg-binaries/opus-binaries/e4d4b74/x86_64-w64-mingw32/include
 
 Name: Opus
-Description: Opus IETF audio codec (floating-point build)
+Description: Opus IETF audio codec ( build)
 URL: https://opus-codec.org/
-Version: 1.3.1-91-g7b05f44f-dirty
+Version: 1.3.1-91-g7b05f44f
 Requires:
 Conflicts:
-Libs: -L${libdir} -lopus
+Libs: -LC:/Users/hanseul/repos/telegie/deps/ffmpeg-binaries/opus-binaries/e4d4b74/x86_64-w64-mingw32/lib -lopus
 Libs.private: -lm
-Cflags: -I${includedir}/opus
+Cflags: -IC:/Users/hanseul/repos/telegie/deps/ffmpeg-binaries/opus-binaries/e4d4b74/x86_64-w64-mingw32/include/opus

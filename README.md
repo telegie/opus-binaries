@@ -16,7 +16,7 @@ mkdir install
 
 cd build
 
-cmake ../opus -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=../e4d4b74/x86_64-w64-mingw32
+cmake ../opus -G "Unix Makefiles" -DOPUS_FORTIFY_SOURCE=OFF -DOPUS_STACK_PROTECTOR=OFF -DCMAKE_INSTALL_PREFIX=../e4d4b74/x86_64-w64-mingw32
 
 make
 

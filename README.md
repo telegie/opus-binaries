@@ -19,3 +19,5 @@ Run ../script/configure-wasm.sh
 make
 
 make install
+
+Move files outside of /install and fix prefix of opus.pc to where the files are moved.

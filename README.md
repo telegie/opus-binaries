@@ -14,7 +14,7 @@ mkdir install
 
 cd build
 
-Run ../script/configure-wasm.sh
+Run ../script/configure-mingw64.sh
 
 make
 

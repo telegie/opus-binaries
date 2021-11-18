@@ -2,7 +2,11 @@
 
 ## Windows
 
-Open msys2
+Open mingw64
+
+pacman -Syy (update pacman package list)
+
+pacman -S mingw-w64-x86_64-libssp (required by opus to support building with fortified functions)
 
 mkdir build
 
@@ -10,9 +14,7 @@ mkdir install
 
 cd build
 
-../opus/autogen.sh
-
-../opus/configure --prefix=/c/Users/hanseul/repos/telegie/deps/ffmpeg-binaries/opus-binaries/install
+Run ../script/configure-wasm.sh
 
 make
 

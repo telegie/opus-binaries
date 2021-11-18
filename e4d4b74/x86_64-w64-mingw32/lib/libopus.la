@@ -5,7 +5,7 @@
 # It is necessary for linking the library.
 
 # The name that we can dlopen(3).
-dlname='../bin/msys-opus-0.dll'
+dlname='../bin/libopus-0.dll'
 
 # Names of this library.
 library_names='libopus.dll.a'
@@ -17,7 +17,7 @@ old_library='libopus.a'
 inherited_linker_flags=''
 
 # Libraries that this one depends upon.
-dependency_libs=''
+dependency_libs=' -lssp'
 
 # Names of additional weak libraries provided by this library
 weak_library_names=''

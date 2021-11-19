@@ -23,11 +23,13 @@ Note: Using ./configure leaves dll files that does not work well with MSVC.
 
 ## Wasm from Mac
 
+brew install autoconf automake libtool
+
 mkdir build
 
 cd build
 
-cmake ../opus -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=../e4d4b74/arm64-ios
+emmake cmake -S ../opus -DCMAKE_INSTALL_PREFIX=../e4d4b74/arm64-ios
 
 make
 

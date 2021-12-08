@@ -28,8 +28,12 @@ mkdir build
 
 cd build
 
-emmake cmake -S ../opus -DCMAKE_INSTALL_PREFIX=../e4d4b74/wasm32-emscripten
+../scripts/configure-wasm.sh
 
 make
 
 make install
+
+# Mac and iOS
+
+Same with wasm, just with a different configure .sh file.

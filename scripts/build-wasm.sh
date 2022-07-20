@@ -9,6 +9,6 @@ emconfigure ../opus/configure \
   --disable-intrinsics \
   --disable-doc \
   --disable-extra-programs \
-  --prefix="/Users/hanseuljun/repos/telegie/deps/ffmpeg-binaries/opus-binaries/e4d4b74/wasm32-emscripten" \
+  --prefix="$(pwd)/../e4d4b74/wasm32-emscripten" \
   --disable-shared \
   CFLAGS="-O3"

@@ -38,4 +38,4 @@ dlopen=''
 dlpreopen=''
 
 # Directory that this library needs to be installed in:
-libdir='/Users/hanseuljun/repos/telegie-app/deps/librgbd/deps/ffmpeg-binaries/opus-binaries/build/../e4d4b74/wasm32-emscripten/lib'
+libdir='/Users/hanseuljun/repos/telegie-app/deps/librgbd/deps/ffmpeg-binaries/opus-binaries/e4d4b74/wasm32-emscripten/lib'

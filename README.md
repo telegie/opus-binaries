@@ -37,3 +37,9 @@ make install
 # Mac and iOS
 
 Same with wasm, just with a different configure .sh file.
+
+# Linux
+
+apt install autoconf libtool
+
+configure-linux.sh

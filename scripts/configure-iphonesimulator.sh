@@ -4,7 +4,7 @@
 
 ../opus/autogen.sh
 
-EXTRA_CFLAGS="-arch arm64 -mios-version-min=14.0 -isysroot $(xcrun --sdk iphonesimulator --show-sdk-path)"
+EXTRA_CFLAGS="-arch arm64 -miphonesimulator-version-min=14.0 -isysroot $(xcrun --sdk iphonesimulator --show-sdk-path)"
 
 ../opus/configure \
   --disable-shared \

@@ -34,7 +34,7 @@ make
 
 make install
 
-# Mac and iOS
+# Mac, iOS, or iPhone Simulator
 
 Same with wasm, just with a different configure .sh file.
 

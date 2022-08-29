@@ -2,6 +2,8 @@
 
 ../opus/autogen.sh
 
+EXTRA_CFLAGS="-fPIC"
+
 ../opus/configure \
   --disable-shared \
   --disable-doc \

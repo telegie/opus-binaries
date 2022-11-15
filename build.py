@@ -60,7 +60,7 @@ def build_arm64_ios_binaries():
                                    "--show-sdk-path"],
                                   capture_output=True,
                                   check=True)
-    iphone_sdk_path = xcrun_output.stdout.decode("utf-8")
+    iphone_sdk_path = xcrun_output.stdout.decode("utf-8").strip()
     cflags=f"-arch arm64 -mios-version-min=14.0 -isysroot {iphone_sdk_path} -O2"
 
     subprocess.run([f"{here}/opus/configure",
@@ -88,7 +88,7 @@ def build_arm64_iphonesimulator_binaries():
                                   capture_output=True,
                                   check=True)
 
-    iphonesimulator_sdk_path = xcrun_output.stdout.decode("utf-8")
+    iphonesimulator_sdk_path = xcrun_output.stdout.decode("utf-8").strip()
     cflags=f"-arch arm64 -miphonesimulator-version-min=14.0 -isysroot {iphonesimulator_sdk_path} -O2"
 
     subprocess.run([f"{here}/opus/configure",
@@ -115,7 +115,7 @@ def build_x64_linux_binaries():
                     "--disable-doc",
                     "--disable-extra-programs",
                     f"--prefix={here}/install/x64-linux",
-                    "CFLAGS=-fPIC"],
+                    "CFLAGS=-fPIC -O2"],
                    cwd=build_path,
                    check=True)
     subprocess.run(["make", "-C", build_path, "-j8"], check=True)

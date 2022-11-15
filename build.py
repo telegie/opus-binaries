@@ -23,7 +23,7 @@ def build_arm64_mac_binaries():
                     "--disable-extra-programs",
                     "--host=arm-apple-darwin",
                     f"--prefix={here}/install/arm64-mac",
-                    "CFLAGS=-arch arm64"],
+                    "CFLAGS=-arch arm64 -O2"],
                    cwd=build_path,
                    check=True)
     subprocess.run(["make", "-C", build_path, "-j8"], check=True)
@@ -42,7 +42,7 @@ def build_x64_mac_binaries():
                     "--disable-extra-programs",
                     "--host=x86_64-apple-darwin",
                     f"--prefix={here}/install/x64-mac",
-                    "CFLAGS=-arch x86_64"],
+                    "CFLAGS=-arch x86_64 -O2"],
                    cwd=build_path,
                    check=True)
     subprocess.run(["make", "-C", build_path, "-j8"], check=True)
@@ -61,7 +61,7 @@ def build_arm64_ios_binaries():
                                   capture_output=True,
                                   check=True)
     iphone_sdk_path = xcrun_output.stdout.decode("utf-8")
-    cflags=f"-arch arm64 -mios-version-min=14.0 -isysroot {iphone_sdk_path}"
+    cflags=f"-arch arm64 -mios-version-min=14.0 -isysroot {iphone_sdk_path} -O2"
 
     subprocess.run([f"{here}/opus/configure",
                     "--disable-shared",
@@ -89,7 +89,7 @@ def build_arm64_iphonesimulator_binaries():
                                   check=True)
 
     iphonesimulator_sdk_path = xcrun_output.stdout.decode("utf-8")
-    cflags=f"-arch arm64 -miphonesimulator-version-min=14.0 -isysroot {iphonesimulator_sdk_path}"
+    cflags=f"-arch arm64 -miphonesimulator-version-min=14.0 -isysroot {iphonesimulator_sdk_path} -O2"
 
     subprocess.run([f"{here}/opus/configure",
                     "--disable-shared",
@@ -122,6 +122,26 @@ def build_x64_linux_binaries():
     subprocess.run(["make", "-C", build_path, "install"], check=True)
 
 
+def build_wasm32_emcsripten_binaries():
+    here = Path(__file__).parent.resolve()
+    build_path = f"{here}/build/wasm32-emscripten"
+    if not os.path.exists(build_path):
+        os.makedirs(build_path)
+
+    subprocess.run([f"{here}/opus/configure",
+                    "--disable-shared",
+                    "--disable-asm",
+                    "--disable-intrinsics",
+                    "--disable-doc",
+                    "--disable-extra-programs",
+                    f"--prefix={here}/install/wasm32-emscripten",
+                    "CFLAGS=-O2"],
+                   cwd=build_path,
+                   check=True)
+    subprocess.run(["make", "-C", build_path, "-j8"], check=True)
+    subprocess.run(["make", "-C", build_path, "install"], check=True)
+
+
 
 def main():
     run_autogen()
@@ -131,9 +151,11 @@ def main():
         build_x64_mac_binaries()
         build_arm64_ios_binaries()
         build_arm64_iphonesimulator_binaries()
+        build_wasm32_emcsripten_binaries()
         return
     elif platform.system() == "Linux":
         build_x64_linux_binaries()
+        build_wasm32_emcsripten_binaries()
         return
 
     raise Exception(f"opus build not supported.")

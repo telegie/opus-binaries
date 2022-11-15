@@ -92,7 +92,7 @@ def main():
             build_arm64_mac_binaries()
             build_arm64_ios_binaries()
             build_arm64_iphonesimulator_binaries()
-        return
+            return
 
     raise Exception(f"opus build not supported.")
 

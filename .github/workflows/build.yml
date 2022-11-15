@@ -27,7 +27,7 @@ jobs:
           submodules: recursive
 
       - name: Install dependencies
-        run: apt install automake
+        run: sudo apt-get -y install automake
 
       - name: Build
         run: python3 build.py

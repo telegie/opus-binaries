@@ -113,7 +113,7 @@ def build_x64_linux_binaries():
                     "--disable-doc",
                     "--disable-extra-programs",
                     f"--prefix={here}/install/x64-linux",
-                    "CFLAGS=-arch x86_64 -fPIC"],
+                    "CFLAGS=-fPIC"],
                    cwd=build_path,
                    check=True)
     subprocess.run(["make", "-C", build_path, "-j8"], check=True)

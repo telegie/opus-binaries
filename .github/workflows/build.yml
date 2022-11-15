@@ -12,6 +12,9 @@ jobs:
         with:
           submodules: recursive
 
+      - name: Install dependencies
+        run: brew install autoconf
+
       - name: Build
         run: python3 build.py
 

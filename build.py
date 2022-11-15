@@ -130,7 +130,7 @@ def main():
         build_arm64_ios_binaries()
         build_arm64_iphonesimulator_binaries()
         return
-    elif platform.syste() == "Linux":
+    elif platform.system() == "Linux":
         build_x64_linux_binaries()
         return
 

@@ -40,7 +40,7 @@ def build_arm64_ios_binaries():
                                   capture_output=True,
                                   check=True)
     iphone_sdk_path = xcrun_output.stdout.decode("utf-8")
-    cflags=f"-arch arm64 -isysroot {iphone_sdk_path}"
+    cflags=f"-arch arm64 -mios-version-min=14.0 -isysroot {iphone_sdk_path}"
 
     subprocess.run([f"{here}/opus/configure",
                     "--disable-shared",
@@ -68,7 +68,7 @@ def build_arm64_iphonesimulator_binaries():
                                   check=True)
 
     iphonesimulator_sdk_path = xcrun_output.stdout.decode("utf-8")
-    cflags=f"-arch arm64 -isysroot {iphonesimulator_sdk_path}"
+    cflags=f"-arch arm64 -miphonesimulator-version-min=14.0 -isysroot {iphonesimulator_sdk_path}"
 
     subprocess.run([f"{here}/opus/configure",
                     "--disable-shared",

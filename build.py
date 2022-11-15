@@ -39,7 +39,6 @@ def build_arm64_ios_binaries():
                                    "--show-sdk-path"],
                                   capture_output=True,
                                   check=True)
-
     iphone_sdk_path = xcrun_output.stdout.decode("utf-8")
     cflags=f"-arch arm64 -isysroot {iphone_sdk_path}"
 

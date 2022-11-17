@@ -1,5 +1,10 @@
 # opus-binaries
 
+## How to Build
+
+- git submodule update --init --recursive
+- python3 build.py
+
 ## Windows
 
 Open mingw64
@@ -33,10 +38,6 @@ cd build
 make
 
 make install
-
-# Mac, iOS, or iPhone Simulator
-
-Same with wasm, just with a different configure .sh file.
 
 # Linux
 

@@ -142,7 +142,6 @@ def build_wasm32_emcsripten_binaries():
     subprocess.run(["make", "-C", build_path, "install"], check=True)
 
 
-
 def main():
     run_autogen()
 

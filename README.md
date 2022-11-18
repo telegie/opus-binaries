@@ -5,7 +5,7 @@
 - git submodule update --init --recursive
 - python3 build.py
 
-## Windows
+## For Windows
 
 Open mingw64
 
@@ -24,23 +24,3 @@ make
 make install
 
 Note: Using ./configure leaves dll files that does not work well with MSVC.
-
-## Wasm from Mac
-
-brew install autoconf automake libtool
-
-mkdir build
-
-cd build
-
-../scripts/configure-wasm.sh
-
-make
-
-make install
-
-# Linux
-
-apt install autoconf libtool
-
-configure-linux.sh

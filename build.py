@@ -5,6 +5,16 @@ import subprocess
 from pathlib import Path
 
 
+def run_autogen_windows():
+    here = Path(__file__).parent.resolve()
+    subprocess.run(["c:/tools/msys64/usr/bin/env",
+                    "MSYSTEM=MINGW64",
+                    "/bin/bash",
+                    "-l",
+                    "/c/Users/hanseul/repos/opus-binaries/opus/autogen.sh"],
+                   check=True)
+
+
 def run_autogen():
     here = Path(__file__).parent.resolve()
     subprocess.run([f"{here}/opus/autogen.sh"],
@@ -143,7 +153,10 @@ def build_wasm32_emcsripten_binaries():
 
 
 def main():
-    run_autogen()
+    if platform.system() == "Windows":
+        run_autogen_windows()
+    else:
+        run_autogen()
 
     if platform.system() == "Darwin":
         build_arm64_mac_binaries()

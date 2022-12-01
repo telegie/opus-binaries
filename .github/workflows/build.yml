@@ -12,6 +12,10 @@ jobs:
         with:
           submodules: recursive
 
+      # build.py requires MSYS2
+      - name: Setup MSYS2
+        uses: msys2/setup-msys2@v2
+
       # build.py requires msbuild
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v1.1

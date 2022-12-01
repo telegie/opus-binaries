@@ -5,20 +5,46 @@ import subprocess
 from pathlib import Path
 
 
+def run_in_mingw(extra_args, check=False):
+    args = ["c:/tools/msys64/usr/bin/env",
+            "MSYSTEM=MINGW64"]
+    args = args + extra_args
+    subprocess.run(args,
+                   check=check)
+
+
 def run_autogen_windows():
     here = Path(__file__).parent.resolve()
-    subprocess.run(["c:/tools/msys64/usr/bin/env",
-                    "MSYSTEM=MINGW64",
-                    "/bin/bash",
-                    "-l",
-                    "/c/Users/hanseul/repos/opus-binaries/opus/autogen.sh"],
-                   check=True)
+    run_in_mingw(["/bin/bash",
+                  "-l",
+                  f"{here}/opus/autogen.sh"],
+                  check=True)
 
 
 def run_autogen():
     here = Path(__file__).parent.resolve()
     subprocess.run([f"{here}/opus/autogen.sh"],
                    check=True)
+
+
+def build_x64_windows_binaries():
+    here = Path(__file__).parent.resolve()
+
+    build_path = f"{here}/build/x64-windows"
+    if not os.path.exists(build_path):
+        os.makedirs(build_path)
+
+    subprocess.run(["cmake",
+                    "-S", f"{here}/opus",
+                    "-B", build_path,
+                    "-D", "OPUS_FORTIFY_SOURCE=OFF",
+                    "-D", "OPUS_STACK_PROTECTOR=OFF",
+                    "-D", f"CMAKE_INSTALL_PREFIX={here}/install/x64-windows"],
+                    check=True)
+    subprocess.run(["msbuild",
+                    f"{build_path}/INSTALL.vcxproj",
+                    "/p:Configuration=RelWithDebInfo"],
+                    check=True)
 
 
 def build_arm64_mac_binaries():
@@ -158,7 +184,10 @@ def main():
     else:
         run_autogen()
 
-    if platform.system() == "Darwin":
+    if platform.system() == "Windows":
+        build_x64_windows_binaries()
+        return
+    elif platform.system() == "Darwin":
         build_arm64_mac_binaries()
         build_x64_mac_binaries()
         build_arm64_ios_binaries()

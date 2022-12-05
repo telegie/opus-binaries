@@ -29,7 +29,7 @@ def run_in_mingw(extra_args, check=False):
 def run_autogen_windows():
     here = Path(__file__).parent.resolve()
     run_in_mingw(["/bin/bash",
-                  "-l",
+                  "--login",
                   f"{here}/opus/autogen.sh"],
                   check=True)
 
@@ -42,7 +42,6 @@ def run_autogen():
 
 def build_x64_windows_binaries():
     here = Path(__file__).parent.resolve()
-
     build_path = f"{here}/build/x64-windows"
     if not os.path.exists(build_path):
         os.makedirs(build_path)

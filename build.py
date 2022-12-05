@@ -5,9 +5,22 @@ import subprocess
 from pathlib import Path
 
 
+def find_msys64_env():
+    path1 = "c:/msys64/usr/bin/env.exe"
+    if os.path.exists(path1):
+        return path1
+    path2 = "c:/tools/msys64/usr/bin/env.exe"
+    if os.path.exists(path2):
+        return path2
+    return None
+    
+
 def run_in_mingw(extra_args, check=False):
-    args = ["c:/tools/msys64/usr/bin/env",
-            "MSYSTEM=MINGW64"]
+    msys64_env_path = find_msys64_env()
+    if msys64_env_path == None:
+        raise "No msys64 env"
+
+    args = [msys64_env_path, "MSYSTEM=MINGW64"]
     args = args + extra_args
     subprocess.run(args,
                    check=check)

@@ -18,6 +18,7 @@ jobs:
         with:
           update: true
           install: >-
+            autoconf
             automake
 
       # build.py requires msbuild

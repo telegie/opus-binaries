@@ -1,9 +1,9 @@
 # Opus codec reference implementation pkg-config file
 
-prefix=C:/Users/hanseul/repos/telegie/deps/ffmpeg-binaries/opus-binaries/e4d4b74/x86_64-w64-mingw32
-exec_prefix=C:/Users/hanseul/repos/telegie/deps/ffmpeg-binaries/opus-binaries/e4d4b74/x86_64-w64-mingw32
-libdir=C:/Users/hanseul/repos/telegie/deps/ffmpeg-binaries/opus-binaries/e4d4b74/x86_64-w64-mingw32/lib
-includedir=C:/Users/hanseul/repos/telegie/deps/ffmpeg-binaries/opus-binaries/e4d4b74/x86_64-w64-mingw32/include
+prefix=C:/Users/hanseul/repos/opus-binaries/install/x64-windows
+exec_prefix=C:/Users/hanseul/repos/opus-binaries/install/x64-windows
+libdir=C:/Users/hanseul/repos/opus-binaries/install/x64-windows/lib
+includedir=C:/Users/hanseul/repos/opus-binaries/install/x64-windows/include
 
 Name: Opus
 Description: Opus IETF audio codec ( build)
@@ -11,6 +11,6 @@ URL: https://opus-codec.org/
 Version: 1.3.1-91-g7b05f44f
 Requires:
 Conflicts:
-Libs: -LC:/Users/hanseul/repos/telegie/deps/ffmpeg-binaries/opus-binaries/e4d4b74/x86_64-w64-mingw32/lib -lopus
-Libs.private: -lm
-Cflags: -IC:/Users/hanseul/repos/telegie/deps/ffmpeg-binaries/opus-binaries/e4d4b74/x86_64-w64-mingw32/include/opus
+Libs: -LC:/Users/hanseul/repos/opus-binaries/install/x64-windows/lib -lopus
+Libs.private: 
+Cflags: -IC:/Users/hanseul/repos/opus-binaries/install/x64-windows/include/opus

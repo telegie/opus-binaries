@@ -20,6 +20,7 @@ jobs:
           install: >-
             autoconf
             automake
+            base-devel
 
       # build.py requires msbuild
       - name: Add msbuild to PATH

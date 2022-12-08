@@ -176,18 +176,20 @@ def build_wasm32_emcsripten_binaries():
     if not os.path.exists(build_path):
         os.makedirs(build_path)
 
-    subprocess.run([f"{here}/opus/configure",
+    subprocess.run(["emconfigure",
+                    f"{here}/opus/configure",
                     "--disable-shared",
                     "--disable-asm",
                     "--disable-intrinsics",
                     "--disable-doc",
                     "--disable-extra-programs",
+                    "--disable-stack-protector",
                     f"--prefix={here}/install/wasm32-emscripten",
-                    "CFLAGS=-O2"],
+                    "CFLAGS=-O3"],
                    cwd=build_path,
                    check=True)
-    subprocess.run(["make", "-C", build_path, "-j8"], check=True)
-    subprocess.run(["make", "-C", build_path, "install"], check=True)
+    subprocess.run(["emmake", "make", "-C", build_path, "-j8"], check=True)
+    subprocess.run(["emmake", "make", "-C", build_path, "install"], check=True)
 
 
 def main():

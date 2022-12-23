@@ -51,7 +51,7 @@ def build_x64_windows_binaries():
                     "-B", build_path,
                     "-D", "OPUS_FORTIFY_SOURCE=OFF",
                     "-D", "OPUS_STACK_PROTECTOR=OFF",
-                    "-D", f"CMAKE_INSTALL_PREFIX={here}/install/x64-windows"],
+                    "-D", f"CMAKE_INSTALL_PREFIX={here}/output/x64-windows"],
                     check=True)
     subprocess.run(["msbuild",
                     f"{build_path}/INSTALL.vcxproj",
@@ -70,12 +70,12 @@ def build_arm64_mac_binaries():
                     "--disable-doc",
                     "--disable-extra-programs",
                     "--host=arm-apple-darwin",
-                    f"--prefix={here}/install/arm64-mac",
+                    f"--prefix={here}/output/arm64-mac",
                     "CFLAGS=-arch arm64 -O2"],
                    cwd=build_path,
                    check=True)
-    subprocess.run(["make", "-C", build_path, "-j8"], check=True)
-    subprocess.run(["make", "-C", build_path, "install"], check=True)
+    subprocess.run(["make", "-j8"], cwd=build_path, check=True)
+    subprocess.run(["make", "install"], cwd=build_path, check=True)
 
 
 def build_x64_mac_binaries():
@@ -89,12 +89,12 @@ def build_x64_mac_binaries():
                     "--disable-doc",
                     "--disable-extra-programs",
                     "--host=x86_64-apple-darwin",
-                    f"--prefix={here}/install/x64-mac",
+                    f"--prefix={here}/output/x64-mac",
                     "CFLAGS=-arch x86_64 -O2"],
                    cwd=build_path,
                    check=True)
-    subprocess.run(["make", "-C", build_path, "-j8"], check=True)
-    subprocess.run(["make", "-C", build_path, "install"], check=True)
+    subprocess.run(["make", "-j8"], cwd=build_path, check=True)
+    subprocess.run(["make", "install"], cwd=build_path, check=True)
 
 
 def build_arm64_ios_binaries():
@@ -116,12 +116,12 @@ def build_arm64_ios_binaries():
                     "--disable-doc",
                     "--disable-extra-programs",
                     "--host=arm-apple-darwin",
-                    f"--prefix={here}/install/arm64-ios",
+                    f"--prefix={here}/output/arm64-ios",
                     f"CFLAGS={cflags}"],
                    cwd=build_path,
                    check=True)
-    subprocess.run(["make", "-C", build_path, "-j8"], check=True)
-    subprocess.run(["make", "-C", build_path, "install"], check=True)
+    subprocess.run(["make", "-j8"], cwd=build_path, check=True)
+    subprocess.run(["make", "install"], cwd=build_path, check=True)
 
 
 def build_arm64_iphonesimulator_binaries():
@@ -144,12 +144,12 @@ def build_arm64_iphonesimulator_binaries():
                     "--disable-doc",
                     "--disable-extra-programs",
                     "--host=arm-apple-darwin",
-                    f"--prefix={here}/install/arm64-iphonesimulator",
+                    f"--prefix={here}/output/arm64-iphonesimulator",
                     f"CFLAGS={cflags}"],
                    cwd=build_path,
                    check=True)
-    subprocess.run(["make", "-C", build_path, "-j8"], check=True)
-    subprocess.run(["make", "-C", build_path, "install"], check=True)
+    subprocess.run(["make", "-j8"], cwd=build_path, check=True)
+    subprocess.run(["make", "install"], cwd=build_path, check=True)
 
 
 def build_x64_linux_binaries():
@@ -162,12 +162,12 @@ def build_x64_linux_binaries():
                     "--disable-shared",
                     "--disable-doc",
                     "--disable-extra-programs",
-                    f"--prefix={here}/install/x64-linux",
+                    f"--prefix={here}/output/x64-linux",
                     "CFLAGS=-fPIC -O2"],
                    cwd=build_path,
                    check=True)
-    subprocess.run(["make", "-C", build_path, "-j8"], check=True)
-    subprocess.run(["make", "-C", build_path, "install"], check=True)
+    subprocess.run(["make", "-j8"], cwd=build_path, check=True)
+    subprocess.run(["make", "install"], cwd=build_path, check=True)
 
 
 def build_wasm32_emcsripten_binaries():
@@ -184,12 +184,12 @@ def build_wasm32_emcsripten_binaries():
                     "--disable-doc",
                     "--disable-extra-programs",
                     "--disable-stack-protector",
-                    f"--prefix={here}/install/wasm32-emscripten",
+                    f"--prefix={here}/output/wasm32-emscripten",
                     "CFLAGS=-O3"],
                    cwd=build_path,
                    check=True)
-    subprocess.run(["emmake", "make", "-C", build_path, "-j8"], check=True)
-    subprocess.run(["emmake", "make", "-C", build_path, "install"], check=True)
+    subprocess.run(["emmake", "make", "-j8"], cwd=build_path, check=True)
+    subprocess.run(["emmake", "make", "install"], cwd=build_path, check=True)
 
 
 def main():

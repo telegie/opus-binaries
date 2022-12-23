@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
+import argparse
 import os
 import platform
+import shutil
 import subprocess
 from pathlib import Path
 
@@ -176,6 +178,9 @@ def build_wasm32_emcsripten_binaries():
     if not os.path.exists(build_path):
         os.makedirs(build_path)
 
+    env = os.environ.copy()
+    env["CFLAGS"] = "-fPIC -O3"
+
     subprocess.run(["emconfigure",
                     f"{here}/opus/configure",
                     "--disable-shared",
@@ -184,15 +189,24 @@ def build_wasm32_emcsripten_binaries():
                     "--disable-doc",
                     "--disable-extra-programs",
                     "--disable-stack-protector",
-                    f"--prefix={here}/output/wasm32-emscripten",
-                    "CFLAGS=-O3"],
+                    f"--prefix={here}/output/wasm32-emscripten"],
                    cwd=build_path,
-                   check=True)
+                   check=True,
+                   env=env)
     subprocess.run(["emmake", "make", "-j8"], cwd=build_path, check=True)
     subprocess.run(["emmake", "make", "install"], cwd=build_path, check=True)
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--rebuild", action="store_true")
+    parser_args = parser.parse_args()
+
+    here = Path(__file__).parent.resolve()
+    if parser_args.rebuild:
+        shutil.rmtree(f"{here}/build")
+        shutil.rmtree(f"{here}/output")
+
     if platform.system() == "Windows":
         run_autogen_windows()
     else:

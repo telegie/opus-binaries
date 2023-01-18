@@ -38,4 +38,4 @@ dlopen=''
 dlpreopen=''
 
 # Directory that this library needs to be installed in:
-libdir='/home/hanseul/repos/opus-binaries/install/x64-linux/lib'
+libdir='/home/hanseul/repos/librgbd/deps/ffmpeg-binaries/opus-binaries/output/x64-linux/lib'

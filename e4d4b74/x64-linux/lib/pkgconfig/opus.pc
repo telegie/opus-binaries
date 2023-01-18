@@ -1,6 +1,6 @@
 # Opus codec reference implementation pkg-config file
 
-prefix=/home/hanseul/repos/opus-binaries/install/x64-linux
+prefix=/home/hanseul/repos/librgbd/deps/ffmpeg-binaries/opus-binaries/output/x64-linux
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include

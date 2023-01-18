@@ -204,8 +204,12 @@ def main():
 
     here = Path(__file__).parent.resolve()
     if parser_args.rebuild:
-        shutil.rmtree(f"{here}/build")
-        shutil.rmtree(f"{here}/output")
+        build_path = Path(f"{here}/build")
+        output_path = Path(f"{here}/output")
+        if build_path.exists():
+            shutil.rmtree(build_path)
+        if output_path.exists():
+            shutil.rmtree(output_path)
 
     if platform.system() == "Windows":
         run_autogen_windows()

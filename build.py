@@ -228,7 +228,6 @@ def main():
         return
     elif platform.system() == "Linux":
         build_x64_linux_binaries()
-        build_wasm32_emcsripten_binaries()
         return
 
     raise Exception(f"opus build not supported.")

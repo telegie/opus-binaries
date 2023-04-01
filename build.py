@@ -15,7 +15,7 @@ def find_msys64_env():
     if os.path.exists(path2):
         return path2
     return None
-    
+
 
 def run_in_mingw(extra_args, check=False):
     msys64_env_path = find_msys64_env()
@@ -42,18 +42,26 @@ def run_autogen():
                    check=True)
 
 
-def build_x64_windows_binaries():
+def build_x64_windows_binaries(rebuild):
     here = Path(__file__).parent.resolve()
     build_path = f"{here}/build/x64-windows"
+    output_path = f"{here}/output/x64-windows"
+
+    if not rebuild and os.path.exists(output_path):
+        print("opus x64-windows build already built")
+        return
+
     if not os.path.exists(build_path):
         os.makedirs(build_path)
+
+    run_autogen_windows()
 
     subprocess.run(["cmake",
                     "-S", f"{here}/opus",
                     "-B", build_path,
                     "-D", "OPUS_FORTIFY_SOURCE=OFF",
                     "-D", "OPUS_STACK_PROTECTOR=OFF",
-                    "-D", f"CMAKE_INSTALL_PREFIX={here}/output/x64-windows"],
+                    "-D", f"CMAKE_INSTALL_PREFIX={output_path}"],
                     check=True)
     subprocess.run(["msbuild",
                     f"{build_path}/INSTALL.vcxproj",
@@ -212,14 +220,12 @@ def main():
             shutil.rmtree(output_path)
 
     if platform.system() == "Windows":
-        run_autogen_windows()
-    else:
-        run_autogen()
-
-    if platform.system() == "Windows":
-        build_x64_windows_binaries()
+        # run_autogen_windows included in build_x64_windows_binaries
+        build_x64_windows_binaries(parser_args.rebuild)
         return
     elif platform.system() == "Darwin":
+        # running run_autogen here to run it only once
+        run_autogen()
         build_arm64_mac_binaries()
         build_x64_mac_binaries()
         build_arm64_ios_binaries()
@@ -227,6 +233,7 @@ def main():
         build_wasm32_emcsripten_binaries()
         return
     elif platform.system() == "Linux":
+        run_autogen()
         build_x64_linux_binaries()
         return
 
